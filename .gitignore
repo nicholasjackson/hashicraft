@@ -2,3 +2,8 @@ mc_server/world/*
 mc_server/mods/*
 !mc_server/mods/.keep
 !mc_server/world/.keep
+
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+.envrc

@@ -11,13 +11,17 @@ if [ ! -f /minecraft/world/level.dat ]; then
 fi
 
 echo "Installing default mods"
-if [ ! -f /minecraft/mods/Web-Displays-Mod-1.12.2.jar ]; then 
+if [ ! -f /minecraft/mods/mcef-1.12.2-1.11.jar ]; then 
   cd /tmp && \
     wget https://github.com/nicholasjackson/mc/releases/download/v0.0.0/mods.tar.gz && \
     tar -xzf mods.tar.gz && \
     mv ./mods/* /minecraft/mods/ && \
     rm mods.tar.gz
 fi
+
+# Configure the properties
+# Echo the file as it has embedded environment variables
+eval "echo \"$(cat /server.properties)\"" > /minecraft/server.properties
 
 # Start the server
 cd /minecraft

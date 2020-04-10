@@ -22,6 +22,7 @@ COPY ./eula.txt eula.txt
 
 # Add the entrypoint
 COPY ./entrypoint.sh /minecraft/entrypoint.sh
+COPY ./server.properties /server.properties
 
 ENV JAVA_MEMORY 1G
 

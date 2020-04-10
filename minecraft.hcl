@@ -12,15 +12,20 @@ container "minecraft" {
     source = "./mc_server/world"
     destination = "/minecraft/world"
   }
-  
-  volume {
-    source = "./server.properties"
-    destination = "/minecraft/server.properties"
-  }
 
   port {
     local = 25565
     remote = 25565
     host = 25565
+  }
+
+  env {
+    key = "MINECRAFT_MOTD"
+    value = "HashiCraft"
+  }
+  
+  env {
+    key = "MINECRAFT_RCONPASSWORD"
+    value = "password"
   }
 }
