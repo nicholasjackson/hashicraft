@@ -1,7 +1,4 @@
-mc_server/world/*
-mc_server/mods/*
-!mc_server/mods/.keep
-!mc_server/world/.keep
+mc_server
 
 .terraform
 terraform.tfstate

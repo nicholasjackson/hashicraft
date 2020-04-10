@@ -12,6 +12,11 @@ container "minecraft" {
     source = "./mc_server/world"
     destination = "/minecraft/world"
   }
+  
+  volume {
+    source = "./mc_server/config"
+    destination = "/minecraft/config"
+  }
 
   port {
     local = 25565
@@ -25,7 +30,23 @@ container "minecraft" {
   }
   
   env {
-    key = "MINECRAFT_RCONPASSWORD"
+    key = "MINECRAFT_RCON_PASSWORD"
     value = "password"
+  }
+  
+  env {
+    key = "MINECRAFT_RCON_ENABLED"
+    value = "true"
+  }
+
+  # Install default Mods and World
+  env {
+    key = "WORLD_BACKUP"
+    value = "https://github.com/nicholasjackson/hashicraft/releases/download/v0.0.0/world2.tar.gz"
+  }
+  
+  env {
+    key = "MODS_BACKUP"
+    value = "https://github.com/nicholasjackson/hashicraft/releases/download/v0.0.0/mods.tar.gz"
   }
 }

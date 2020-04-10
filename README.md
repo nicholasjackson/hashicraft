@@ -2,7 +2,9 @@
   title: Nics minecraft server
 ---
 
-# Nics Minecraft Server
+# HashiCraft Minecraft Server
+
+![](./images/hashicraft_logo.png)
 
 ## Running
 Install Shipyard [https://shipyard.run](https://shipyard.run)
@@ -54,7 +56,7 @@ To make changes to the docker image you can modify the Dockerfile and entrypoint
 docker build -t nicholasjackson/minecraft:latest
 ```
 
-## Exposing to the outside world
+## Exposing your server to the outside world
 Install ngrok
 
 ```

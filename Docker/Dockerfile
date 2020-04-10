@@ -24,6 +24,9 @@ COPY ./eula.txt eula.txt
 COPY ./entrypoint.sh /minecraft/entrypoint.sh
 COPY ./server.properties /server.properties
 
+# Set defaults for environment variables
 ENV JAVA_MEMORY 1G
+ENV MINECRAFT_RCON_ENABLED false
+ENV MINECRAFT_WHITELIST_ENABLED false
 
 ENTRYPOINT [ "/minecraft/entrypoint.sh" ]

@@ -32,6 +32,12 @@ resource "azurerm_storage_share" "minecraft_world" {
   quota                = 50
 }
 
+resource "azurerm_storage_share" "minecraft_config" {
+  name                 = "config"
+  storage_account_name = azurerm_storage_account.minecraft.name
+  quota                = 1
+}
+
 resource "azurerm_container_group" "minecraft" {
   name                = "minecraft"
   location            = azurerm_resource_group.minecraft.location
@@ -42,9 +48,9 @@ resource "azurerm_container_group" "minecraft" {
 
   container {
     name   = "studio"
-    image  = "nicholasjackson/minecraft:latest"
-    cpu    = "0.5"
-    memory = "1.5"
+    image  = "nicholasjackson/minecraft:v0.1.0"
+    cpu    = "2"
+    memory = "4"
 
     # Main minecraft port
     ports {
@@ -59,8 +65,13 @@ resource "azurerm_container_group" "minecraft" {
     }
 
     environment_variables = {
+      JAVA_MEMORY="4G",
       MINECRAFT_MOTD="HashiCraft",
-      MINECRAFT_RCONPASSWORD=random_password.password.result
+      MINECRAFT_WHITELIST_ENABLED=true,
+      MINECRAFT_RCON_ENABLED=true,
+      MINECRAFT_RCON_PASSWORD=random_password.password.result,
+      WORLD_BACKUP="https://github.com/nicholasjackson/hashicraft/releases/download/v0.0.0/world2.tar.gz"
+      MODS_BACKUP="https://github.com/nicholasjackson/hashicraft/releases/download/v0.0.0/mods.tar.gz"
     }
   
     volume {
@@ -69,6 +80,14 @@ resource "azurerm_container_group" "minecraft" {
       storage_account_name = azurerm_storage_account.minecraft.name
       storage_account_key = azurerm_storage_account.minecraft.primary_access_key
       share_name = azurerm_storage_share.minecraft_world.name  
+    }
+    
+    volume {
+      name = "config"
+      mount_path = "/minecraft/config"
+      storage_account_name = azurerm_storage_account.minecraft.name
+      storage_account_key = azurerm_storage_account.minecraft.primary_access_key
+      share_name = azurerm_storage_share.minecraft_config.name  
     }
   }
 
