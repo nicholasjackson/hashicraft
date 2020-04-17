@@ -1,5 +1,5 @@
 DOCKER_NAME=nicholasjackson/minecraft
-DOCKER_VERSION=v0.1.0
+DOCKER_VERSION=v1.12.2
 
 build:
 	cd Docker && docker build -t ${DOCKER_NAME}:${DOCKER_VERSION} .

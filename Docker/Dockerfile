@@ -1,15 +1,14 @@
-FROM java:8-jdk
+FROM openjdk:8-slim
 
 WORKDIR /minecraft
+
+RUN apt-get update && apt-get install -y wget
 
 # Install rcon
 RUN wget https://github.com/itzg/rcon-cli/releases/download/1.4.7/rcon-cli_1.4.7_linux_amd64.tar.gz && \
   tar -xzf rcon-cli_1.4.7_linux_amd64.tar.gz && \
   rm rcon-cli_1.4.7_linux_amd64.tar.gz && \
   mv rcon-cli /usr/local/bin
-
-
-RUN echo "Tokens $github_token"
 
 # Setup the server
 RUN wget https://github.com/nicholasjackson/mc/releases/download/v0.0.0/forge-1.12.2-14.23.5.2768-installer.tar.gz && \

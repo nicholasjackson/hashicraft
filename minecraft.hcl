@@ -1,6 +1,6 @@
 container "minecraft" {
   image {
-    name = "nicholasjackson/minecraft:latest"
+    name = "nicholasjackson/minecraft:v1.12.2"
   }
 
   volume {
